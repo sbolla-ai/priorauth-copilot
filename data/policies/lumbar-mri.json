@@ -1,0 +1,33 @@
+{
+  "policy_id": "lumbar-mri",
+  "title": "MRI of the lumbar spine for low back pain",
+  "service_codes": ["72148", "72149", "72158"],
+  "disclaimer": "Illustrative criteria written for this demo project. Not an actual Medicare, Medicaid, or commercial payer policy.",
+  "criteria": [
+    {
+      "id": "C1",
+      "text": "Low back pain has persisted for at least 6 weeks.",
+      "baseline_patterns": {
+        "met": ["(?:for|over|past|x)\\s+(?:([6-9]|1[0-9])\\s+weeks|([2-9]|1[0-2])\\s+months)"],
+        "not_met": ["(?:for|over|past|x)\\s+(?:[1-5]\\s+weeks|\\d{1,2}\\s+days)"]
+      }
+    },
+    {
+      "id": "C2",
+      "text": "At least 6 weeks of documented conservative therapy (e.g., physical therapy, NSAIDs, activity modification) without adequate improvement.",
+      "baseline_patterns": {
+        "met": ["(?:completed|failed|despite)[^.]*(?:physical therapy|PT)[^.]*", "(?:physical therapy|PT)[^.]*without (?:adequate |meaningful )?improvement"],
+        "not_met": ["(?:has not|hasn't|not yet) (?:tried|started|attempted) (?:any )?(?:physical therapy|PT|conservative)"]
+      }
+    },
+    {
+      "id": "C3",
+      "text": "Red-flag findings: suspected cauda equina syndrome, progressive neurological deficit, suspected malignancy or infection, or significant trauma. (Meeting C3 alone is sufficient.)",
+      "baseline_patterns": {
+        "met": ["saddle anesthesia", "urinary retention", "cauda equina", "progressive (?:weakness|neurolog)", "history of (?:metastatic|cancer)"],
+        "not_met": ["no red flags?", "denies (?:saddle|bowel|bladder)", "no (?:saddle anesthesia|bowel or bladder)"]
+      }
+    }
+  ],
+  "approve_if_any": [["C1", "C2"], ["C3"]]
+}

@@ -1,0 +1,33 @@
+{
+  "policy_id": "cgm",
+  "title": "Continuous glucose monitor (CGM)",
+  "service_codes": ["A9276", "A9277", "A9278", "E2103"],
+  "disclaimer": "Illustrative criteria written for this demo project. Not an actual Medicare, Medicaid, or commercial payer policy.",
+  "criteria": [
+    {
+      "id": "C1",
+      "text": "Diagnosis of diabetes mellitus (type 1 or type 2).",
+      "baseline_patterns": {
+        "met": ["type [12] diabetes", "\\bT[12]DM\\b", "diabetes mellitus"],
+        "not_met": ["no (?:history|diagnosis) of diabetes"]
+      }
+    },
+    {
+      "id": "C2",
+      "text": "Treated with insulin, OR documented history of problematic hypoglycemia (level 2 or level 3 events).",
+      "baseline_patterns": {
+        "met": ["(?:on|uses|using|takes|basal|bolus)[^.]*insulin", "insulin pump", "level [23] hypoglycemi"],
+        "not_met": ["(?:not on|no) insulin[^.]*(?:denies|no) (?:any )?hypoglycemi"]
+      }
+    },
+    {
+      "id": "C3",
+      "text": "In-person or telehealth visit with the treating practitioner within 6 months before the request.",
+      "baseline_patterns": {
+        "met": ["(?:in-person|telehealth|office|clinic) visit"],
+        "not_met": ["last (?:seen|visit)[^.]*(?:over|more than) (?:6|six|[7-9]|1[0-2]) months"]
+      }
+    }
+  ],
+  "approve_if_any": [["C1", "C2", "C3"]]
+}

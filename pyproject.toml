@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "priorauth-copilot"
+version = "0.1.0"
+description = "Prior-authorization evidence copilot with verified citations, PHI minimization, injection screening and an eval-gated release process."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Sreenivas Bolla" }]
+dependencies = ["opentelemetry-api>=1.25"]
+
+[project.optional-dependencies]
+anthropic = ["anthropic"]
+openai = ["openai"]
+otel = ["opentelemetry-sdk>=1.25", "opentelemetry-exporter-otlp-proto-http>=1.25"]
+dev = ["pytest>=8"]
+
+[project.scripts]
+priorauth = "priorauth.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

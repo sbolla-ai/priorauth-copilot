@@ -1,0 +1,41 @@
+{
+  "policy_id": "knee-arthroplasty",
+  "title": "Total knee arthroplasty for osteoarthritis",
+  "service_codes": ["27447"],
+  "disclaimer": "Illustrative criteria written for this demo project. Not an actual Medicare, Medicaid, or commercial payer policy.",
+  "criteria": [
+    {
+      "id": "C1",
+      "text": "Radiographic evidence of advanced osteoarthritis of the affected knee (Kellgren-Lawrence grade 3 or 4, or bone-on-bone changes).",
+      "baseline_patterns": {
+        "met": ["Kellgren[- ]Lawrence grade [34]", "\\bKL (?:grade )?[34]\\b", "bone[- ]on[- ]bone"],
+        "not_met": ["Kellgren[- ]Lawrence grade [12]", "\\bKL (?:grade )?[12]\\b"]
+      }
+    },
+    {
+      "id": "C2",
+      "text": "Function-limiting knee pain for at least 3 months.",
+      "baseline_patterns": {
+        "met": ["pain[^.]*(?:for|over|x)\\s+(?:([3-9]|1[0-2])\\s+months|(?:a|one|\\d)\\s+years?)"],
+        "not_met": ["pain[^.]*(?:for|over|x)\\s+(?:[1-2]\\s+months|\\d+\\s+weeks)"]
+      }
+    },
+    {
+      "id": "C3",
+      "text": "At least 3 months of failed non-surgical management (physical therapy, weight management, NSAIDs, or intra-articular injections).",
+      "baseline_patterns": {
+        "met": ["(?:failed|despite|without relief from)[^.]*(?:physical therapy|PT|injection|NSAID)"],
+        "not_met": ["(?:has not|hasn't|not yet) (?:tried|started|attempted)"]
+      }
+    },
+    {
+      "id": "C4",
+      "text": "BMI below 40, or documented medical/surgical clearance if BMI is 40 or higher.",
+      "baseline_patterns": {
+        "met": ["BMI (?:of )?(?:[1-3]\\d(?:\\.\\d)?)\\b", "surgical clearance (?:obtained|documented|given)"],
+        "not_met": ["BMI (?:of )?(?:[4-9]\\d(?:\\.\\d)?)\\b[^.]*no (?:surgical |medical )?clearance"]
+      }
+    }
+  ],
+  "approve_if_any": [["C1", "C2", "C3", "C4"]]
+}
